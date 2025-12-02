@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Book Rent System</title>
+    <link rel="stylesheet" href="#">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js"></script>
+</head>
+<style>
+body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.header {
+    background-color: #fff;
+    color: #333;
+    padding: 12px;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    color: #333;
+}
+
+#contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px;
+    background-color: #ffffff;
+}
+
+#contact .container {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#contact .container h2 {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#contact .container p {
+    font-size: 20px;
+    color: #555;
+    line-height: 1.4;
+    margin-bottom: 35px;
+}
+
+.contact-details {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+}
+
+.contact-info i {
+    font-size: 40px;
+    color: #cc987d;
+    margin-right: 1rem;
+}
+
+.contact-form {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #e8d6cf;
+    padding: 22px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form input, 
+.contact-form textarea {
+    margin: 13px 0;
+    padding: 11px;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #cc987d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #eccbb7;
+}
+</style>
+<body>
+<header class="header">
+    <h1>Contact us</h1>
+</header>
+<section id="contact">
+    <div class="container">
+        <h2>Get in touch</h2>
+        <p>If you have any questions, suggestions or just want to say hello, we would love to hear from you.
+             Fill out the form below or reach us through the provided contact details.</p>
+        
+        <div class="contact-details">
+            <div class="contact-info">
+                <i class='bx bx-phone'></i>
+                <p>+1 123 456 643</p>
+            </div>
+            <div class="contact-info">
+                <i class='bx bx-envelope'></i>
+                <p>infobook@system.com</p>
+            </div>
+            <div class="contact-info">
+                <i class='bx bx-map'></i>
+                <p>1 Slovenia Koper 6000</p>
+            </div>
+        </div>
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit" class="btn2">Send Message</button>
+        </form>
+    </div>
+</section>
+<footer>
+</footer>
+
+<script type="module">
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js";
+    import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js";
+
+  
+    const firebaseConfig = {
+        apiKey: "AIzaSyBEOwYndOTHj2Lpv9oaAPqRn9ps7c8eMOk",
+        authDomain: "login-form-5929c.firebaseapp.com",
+        databaseURL: "https://login-form-5929c-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "login-form-5929c",
+        storageBucket: "login-form-5929c.appspot.com",
+        messagingSenderId: "704458274314",
+        appId: "1:704458274314:web:e2dd965b9f5391399591f3"
+    };
+
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+
+    document.querySelector('.contact-form').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+
+        const name = event.target.querySelector('input[type="text"]').value.trim();
+        const email = event.target.querySelector('input[type="email"]').value.trim();
+        const message = event.target.querySelector('textarea').value.trim();
+        const contactMessagesRef = ref(database, 'contactMessages');
+        const newMessageRef = push(contactMessagesRef);
+
+        set(newMessageRef, {
+            name: name,
+            email: email,
+            message: message,
+            timestamp: Date.now()
+        }).then(() => {
+            alert('Message sent successfully!');
+            event.target.reset(); 
+        }).catch((error) => {
+            console.error('Error sending message:', error);
+            alert('Failed to send message.');
+        });
+    });
+</script>
+
+</body>
+</html>

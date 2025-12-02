@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USER RATINGS</title>
+   <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, addDoc, serverTimestamp, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBEOwYndOTHj2Lpv9oaAPqRn9ps7c8eMOk",
+            authDomain: "login-form-5929c.firebaseapp.com",
+            projectId: "login-form-5929c",
+            storageBucket: "login-form-5929c.appspot.com",
+            messagingSenderId: "704458274314",
+            appId: "1:704458274314:web:e2dd965b9f5391399591f3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const firestore = getFirestore(app);
+        const auth = getAuth(app);
+
+        async function fetchUsers() {
+            try {
+                const usersList = document.getElementById('users-list');
+                usersList.innerHTML = '';
+                const querySnapshot = await getDocs(collection(firestore, 'users'));
+                querySnapshot.forEach(async (doc) => {
+                    const user = doc.data();
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <p><strong>Email:</strong> ${user.email}</p>
+                        <button class="rate-button" data-user-id="${doc.id}">Rate This User</button>
+                        <div class="rating-form-container" id="rating-form-${doc.id}" style="display:none;">
+                            <h2>Rate ${user.username || 'this user'}</h2>
+                            <form onsubmit="submitRating(event, '${doc.id}')">
+                                <label for="rating-${doc.id}">Rating (1-5):</label>
+                                <input type="number" id="rating-${doc.id}" min="1" max="5" required />
+                                <button type="submit">Submit Rating</button>
+                            </form>
+                        </div>
+                    `;
+                    usersList.appendChild(li);
+                });
+
+                const rateButtons = document.querySelectorAll('.rate-button');
+                rateButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const userId = button.getAttribute('data-user-id');
+                        showRatingForm(userId);
+                    });
+                });
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        }
+
+        function showRatingForm(userId) {
+            document.querySelector(`#rating-form-${userId}`).style.display = 'block';
+        }
+
+        async function submitRating(event, userId) {
+    event.preventDefault();
+
+    const user = auth.currentUser;
+    if (!user) {
+        alert('You must be signed in to rate a user.');
+        return;
+    }
+
+    const rating = document.getElementById(`rating-${userId}`).value;
+    const ratedBy = user.uid;
+
+    try {
+        const userDoc = await getDoc(doc(firestore, 'users', ratedBy));
+        const userData = userDoc.data();
+        const ratedByEmail = userData.email;
+
+        await addDoc(collection(firestore, 'users', userId, 'ratings'), {
+            rating: parseInt(rating, 10),
+            ratedBy: ratedBy,
+            ratedByEmail: ratedByEmail,  
+            timestamp: serverTimestamp()
+        });
+
+        alert('Rating submitted successfully!');
+        document.querySelector(`#rating-form-${userId}`).style.display = 'none';
+        fetchUsers();
+    } catch (error) {
+        console.error('Error submitting rating:', error);
+    }
+}
+
+
+async function fetchUserRatings(userId) {
+    const ratingsRef = collection(firestore, 'users', userId, 'ratings');
+    try {
+        const ratingsList = document.getElementById('rating-list');
+        ratingsList.innerHTML = '';
+        const querySnapshot = await getDocs(ratingsRef);
+        querySnapshot.forEach((doc) => {
+            const ratingData = doc.data();
+            const li = document.createElement('li');
+            li.textContent = `Rating: ${ratingData.rating} | Rated By: ${ratingData.ratedByEmail} | Timestamp: ${ratingData.timestamp.toDate().toLocaleString()}`;
+            ratingsList.appendChild(li);
+        });
+    } catch (error) {
+        console.error("Error fetching ratings:", error);
+    }
+}
+        window.showRatingForm = showRatingForm;
+        window.submitRating = submitRating;
+        window.onload = fetchUsers;
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style-type: none;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .navigationbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 90px;
+            background: #eccbb7;
+        }
+
+        .navigationbar h2 {
+            color: aliceblue;
+            font-size: 25px;
+            font-weight: 500;
+            padding: 10px;
+        }
+
+        .navigationmenu {
+            display: flex;
+            align-items: center;
+        }
+
+        .navigationmenu ul {
+            display: flex;
+            gap: 17px;
+        }
+
+        .navigationmenu li {
+            display: inline;
+        }
+
+        .navigationmenu li a {
+            color: aliceblue;
+            padding: 0px 10px;
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box .search {
+            padding: 12px 8px;
+            border-radius: 40px;
+            font-size: 14px;
+        }
+
+        .search-box i {
+            color: #394a6c;
+            position: absolute;
+            right: 10px;
+            background-color: rgb(209, 246, 233);
+            padding: 12px;
+            border-radius: 50px;
+        }
+
+        #users-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        #users-list li {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 10px 0;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #users-list h3 {
+            margin: 0;
+            color: #e9b799;
+        }
+
+        #users-list p {
+            margin: 10px 0;
+            color: #3e3c39;
+        }
+
+        .rate-button {
+            background-color: #efc7ae;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .rate-button:hover {
+            background-color: #eccbb7;
+        }
+
+        .rating-form-container {
+            margin-top: 20px;
+        }
+
+        .rating-form-container h2 {
+            color: #e9b799;
+        }
+
+        .rating-form-container form {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 5px 5px 5px rgba(233, 19, 19, 0.295);
+        }
+
+        .rating-form-container label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        .rating-form-container input[type="number"] {
+            width: 95%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .rating-form-container button[type="submit"] {
+            background-color: #e9b799;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .rating-form-container button[type="submit"]:hover {
+            background-color: #e9b799;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navigationbar">
+            <h2>USER RATING</h2>
+            <div class="navigationmenu">
+                <ul>
+                    <li><a href="home.html">HOME</a></li>
+                    <li><a href="main.html">JOIN IN</a></li>
+                    <li><a href="blog.html">BLOG</a></li>
+                    <li><a href="categories.html">CATEGORIES</a></li>
+                    <li><a href="profile.html">PROFILE</a></li>
+                    <li><a href="books.html">REVIEWS</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="contact.html">CONTACT US</a></li>
+                </ul>
+                <div class="search-box">
+                    <input type="search" class="search" placeholder="Search blog here">
+                </div>
+            </div>
+        </nav>
+    </header>
+    <ul id="users-list"></ul>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

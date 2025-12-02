@@ -1,0 +1,24 @@
+{
+  "name": "finalbooksystem",
+  "version": "1.0.0",
+  "description": "",
+  "main": " index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/MilicaP123/finalbooksystem.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/MilicaP123/finalbooksystem/issues"
+  },
+  "homepage": "https://gitlab.com/MilicaP123/finalbooksystem#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "firebase-admin": "^12.3.1"
+  }
+}

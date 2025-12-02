@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <style>
+       * {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.navigationbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 90px;
+    background:#eccbb7;
+}
+
+.navigationbar h2 {
+    color: aliceblue;
+    font-size: 25px;
+    font-weight: 500;
+    padding: 10px;
+}
+
+.navigationmenu {
+    display: flex;
+    align-items: center;
+}
+
+.navigationmenu ul {
+    display: flex;
+    gap: 17px;
+}
+
+.navigationmenu li {
+    display: inline;
+}
+
+.navigationmenu li a {
+    color: aliceblue;
+    padding: 0px 10px;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    
+}
+
+.search-box .search {
+    padding: 12px 8px;
+    border-radius: 40px;
+    font-size: 14px;
+}
+
+.search-box i {
+    color: #394a6c;
+    position: absolute;
+    right: 10px;
+    background-color: rgb(209, 246, 233);
+    padding: 12px;
+    border-radius: 50px;
+}
+
+header {
+    background: #ffffff;
+    width: 100%;
+    height: 100%;
+}
+.menubar {
+    display: none;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+}
+
+.header {
+    max-width: 50%;
+}
+
+.header h5 {
+    font-size: 2rem;
+    color: #a27474;
+}
+
+.header p {
+    font-size: 1.5rem;
+    margin: 20px 0;
+    color: #efc7ae;
+}
+
+.header .btn {
+    padding: 10px 20px;
+    background-color: #eccbb7;
+    color: #ffffff;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.main-header img {
+    max-width: 60%;
+    border-radius: 10px;
+   margin-top:70px;
+}
+
+
+#categories-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 20px;
+}
+
+.arrow {
+    cursor: pointer;
+    font-size: 2rem;
+    color: #394a6c;
+    padding: 0 10px;
+    user-select: none;
+}
+
+.categories-container {
+    display: flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    gap: 25px;
+}
+
+.category-circle {
+    text-align: center;
+    width: 150px;
+    flex-shrink: 0;
+}
+
+.category-circle img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #394a6c;
+}
+
+.category-circle p {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #a27474;
+}
+
+#blog {
+    padding: 50px 20px;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+.blog-header {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #a27474;
+}
+
+.set-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.book-item {
+    width: 23%;
+    background: #fff;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.book-item:hover {
+    transform: scale(1.05);
+}
+
+.book-item img {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.book-item h4 {
+    font-size: 1.5rem;
+    margin: 20px 0;
+    color: #efc7ae;
+}
+
+.book-item p {
+    font-size: 1rem;
+    margin: 10px 20px;
+    color: #394a6c;
+}
+
+.book-item .rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.book-item .rating span {
+    color: gold;
+    font-size: 1.2rem;
+}
+
+.book-item .dates {
+    font-size: 0.9rem;
+    color: #394a6c;
+    margin: 10px 20px;
+}
+
+
+#about {
+    padding: 50px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.about-content {
+    max-width: 50%;
+    margin: auto;
+}
+
+.about-content h2 {
+    font-size: 2.5rem;
+    color: #a27474;
+}
+
+.about-content p {
+    font-size: 1.2rem;
+    margin: 20px 0;
+    color: #394a6c;
+}
+
+.about-content .btn2 {
+    padding: 10px 20px;
+    background-color: #eccbb7;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+@media screen and (max-width: 768px) {
+    .navigationbar h2 {
+        font-size: 20px;
+    }
+
+    .navigationmenu ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .main-header {
+        flex-direction: column;
+    }
+
+    .main-header img {
+        max-width: 100%;
+        margin-top: 20px;
+    }
+
+    .category-circle {
+        width: 100px;
+    }
+
+    .category-circle img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .category-circle p {
+        font-size: 14px;
+    }
+
+    .book-item {
+        width: 100%;
+    }
+
+    .about-content {
+        max-width: 100%;
+    }
+}
+    </style>
+    <script type="module" src=""></script>
+</head>
+<body>
+        <header>
+            <nav class="navigationbar">
+                <div class="logo">
+                    <h2>BOOK RENT HOME</h2>
+                </div>
+                <div class="navigationmenu">
+                    <ul>
+                        <li><a href="home.html">HOME</a></li>
+                        <li><a href="main.html">JOIN IN</a></li>
+                        <li><a href="blog.html">BLOG</a></li>
+                        <li><a href="categories.html">CATEGORIES</a></li>
+                        <li><a href="profile.html"> PROFILE</a></li>
+                        <li><a href="books.html"> REVIEWS</a></li>
+                        <li><a href="about.html">ABOUT</a></li>
+                        <li><a href="contact.html">CONTACT US</a></li>
+                    </ul>
+                    <div class="search-box">
+                        <input type="search" class="search" placeholder="Search book here">
+                    </div>
+                </div>
+            </nav>
+            <div class="menubar"></div>
+            <div class="main-header">
+                <div class="header">
+                    <h5>Book Rent</h5>
+                    <p>Discover, share and rent your favorite book</p>
+                    <a href="main.html" class="btn">Become a member</a>
+                </div>
+                <img src="https://basmo.app/wp-content/uploads/2021/10/what-to-read-next.webp" alt="">
+            </div>
+        </header>
+        <section id="categories-section">
+            <div class="arrow left-arrow" onclick="scrollLeft()">&#9664;</div>
+            <div class="categories-container">
+                
+           
+            <div class="category-circle">
+                <a href="fantasy_books.html">
+                    <img src="https://s26162.pcdn.co/wp-content/uploads/2023/09/fantasy-8094384_1280.jpg" alt="Fantasy">
+                    <p>Fantasy</p>
+                </a>
+            </div>
+            <div class="category-circle">
+                <a href="horror_books.html">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Paul_Gustave_Dore_Raven1.jpg/220px-Paul_Gustave_Dore_Raven1.jpg" alt="Horror">
+                    <p>Horror</p>
+                </a>
+            </div>
+            <div class="category-circle">
+                <a href="thriller_books.html">
+                    <img src="https://storygrid.com/wp-content/uploads/2022/05/Copy-of-Love-Genre-1-1024x1024.png" alt="Thriller">
+                    <p>Thriller</p>
+                </a>
+            </div>
+            <div class="category-circle">
+                <a href="biography_books.html">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Plutarchs_Lives_Vol_the_Third_1727.jpg" alt="Biography">
+                    <p>Biography</p>
+                </a>
+            </div>
+            <div class="category-circle">
+                <a href="adventuref_books.html">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/ThrillingAdventuresVol2No3.jpg" alt="Adventure Fiction">
+                    <p>Adventure fiction</p>
+                </a>
+            </div>
+            <div class="category-circle">
+                <a href="shortstory_books.html">
+                    <img src="https://self-publishingschool.com/wp-content/uploads/2021/09/how-to-write-a-short-story-opening-example-932x1024.png" alt="Short Story">
+                    <p>Short story</p>
+                </a>
+            </div>
+            <div class="category-circle">
+                <a href="crime_books.html">
+                    <img src="https://www.novelsuspects.com/wp-content/uploads/2022/01/Short-Crime-Fiction-You-Can-Devour-in-One-Sitting_NovelSuspects.png" alt="Crime Fiction">
+                    <p>Crime fiction</p>
+                </a>
+            </div>
+            <div class="category-circle">
+                <a href="literary_books.html">
+                    <img src="https://www.writersdigest.com/.image/ar_4:3%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTk2NTk0MTM4MjYxNDk3NjYy/woodson-317.jpg" alt="Literary Fiction">
+                    <p>Literary fiction</p>
+                </a>
+            </div>
+            
+           
+           
+        </div>
+        <div class="arrow right-arrow" onclick="scrollRight()">&#9654;</div>
+    </section>
+
+        <section id="blog">
+            <h2 class="blog-header">Latest Books</h2>
+            <div class="set-row" id="latest-books">
+                <div class="col book-item" onclick="openBookPage('book_detail1.html')">
+                    <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1705433648i/55777544.jpg" alt="Book Cover">
+                    <h4>Long Island Compromise</h4>
+                    <p>Author: Taffy Brodesser-Akner</p>
+                    <p>Short Description: In 1980 a wealthy businessman 
+                        named Carl Fletcher is kidnapped from his driveway 
+                        in a cloistered town on the nicest part of Long Island,
+                         brutalized, and held for ransom. 
+                         He is returned to his wife and kids less 
+                         than a week later, only slightly worse for wear,
+                          and the family begins the hard work of moving on
+                           with their lives. ...</p>
+                    <div class="rating">
+                        <span>&#9733;&#9733;&#9733;&#9733;&#9734;</span> 
+                        <span>(47 reviews)</span>
+                    </div>
+                    <div class="dates">
+                        <span>9 July 2024</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            function openBookPage(url) {
+                window.location.href = url;
+            }
+            const books = [
+                {
+                    img: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1691777485i/194802722.jpg",
+                    title: "Funny Story",
+                    author: "Emily Henry",
+                    description: "A shimmering, joyful new novel about a pair of opposites with the wrong thing in common",
+                    rating: 4,
+                    reviews: 45,
+                    date: "23 April 2024",
+                    link: "book_detail2.html" 
+                },
+                {
+                    img: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1682720363i/127482608.jpg",
+                    title: "Come and Get it",
+                    author: "Kiley Reid",
+                    description: "A fresh and provocative story about a residential assistant and her messy entanglement with a professor and three unruly students...",
+                    rating: 5,
+                    reviews: 100,
+                    date: "30 January 2024",
+                    link: "book_detail3.html" 
+                }
+                
+            ];
+    
+            const bookContainer = document.getElementById('latest-books');
+    
+            books.forEach(book => {
+                const bookElement = document.createElement('div');
+                bookElement.classList.add('col', 'book-item');
+                bookElement.setAttribute('onclick', `openBookPage('${book.link}')`);
+    
+                bookElement.innerHTML = `
+                    <img src="${book.img}" alt="Book Cover">
+                    <h4>${book.title}</h4>
+                    <p>Author: ${book.author}</p>
+                    <p>Short Description: ${book.description}</p>
+                    <div class="rating">
+                        ${'<span>&#9733;</span>'.repeat(book.rating)}${'<span>&#9734;</span>'.repeat(5 - book.rating)}
+                        <span>(${book.reviews} reviews)</span>
+                    </div>
+                    <div class="dates">
+                        <span>${book.date}</span>
+                    </div>
+                `;
+                
+                bookContainer.appendChild(bookElement);
+            });
+        </script>
+    <section id = "about">
+        <div class=" set-row">
+            <img src="https://media.istockphoto.com/id/1286378180/vector/website-information-concept.jpg?s=612x612&w=0&k=20&c=6v9Hcbp0zp5itIPIywobPQF13YsHIQ4j_srF5VbQusY=" alt = "">
+            <div class="about-content">
+                <h2>About us</h2>
+                <p></p>
+                <a href = "about.html" class=" btn2" >Read More</a>
+        </div>
+        </div>
+    </section>
+    <script>
+    </script>
+    </body>
+    </html>

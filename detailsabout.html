@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="#">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style-type: none;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 90px;
+            background: #eccbb7;
+        }
+        .navbar h2 {
+            color: aliceblue;
+            font-size: 25px;
+            font-weight: 500;
+            padding: 10px;
+        }
+        .navmenu {
+            display: flex;
+            align-items: center;
+        }
+        .navmenu ul {
+            display: flex;
+            gap: 17px;
+        }
+        .navmenu li a {
+            color: aliceblue;
+            padding: 0px 10px;
+            font-size: 15px;
+            font-weight: 400;
+        }
+        .search-box {
+            display: flex;
+            align-items: center;
+        }
+        .search-box .search {
+            padding: 12px 8px;
+            border-radius: 40px;
+            font-size: 14px;
+        }
+        .search-box i {
+            color: #394a6c;
+            position: absolute;
+            right: 10px;
+            background-color: rgb(209, 246, 233);
+            padding: 12px;
+            border-radius: 50px;
+        }
+        header, .profile-container {
+            background: #ffffff;
+            width: 100%;
+        }
+        .profile-container {
+            padding: 200px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 2rem;
+            background-color: #f4f2f1;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .profile-picture img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            margin-right: 20px;
+        }
+        .profile-details h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        .profile-details p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 2;
+            margin-bottom: 0.5rem;
+        }
+        #logout, #details, #rating, #hide {
+            padding: 10px;
+            width: 100px;
+            margin: 10px;
+            border-radius: 10px;
+            color: white;
+            background-color: #cc987d;
+            font-size: 15px;
+        }
+        #loggedUserFName, #loggedUserEmail, #loggedUserLName {
+            line-height: 4;
+        }
+        .books-section, .friends-section, .loan-extensions, .user-ratings {
+            margin-bottom: 2rem;
+        }
+        h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        .books-list ul, .friends-list, #extension-requests, #user-ratings-list {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+        }
+        .books-list ul li, .friends-list li, #extension-requests li, #user-ratings-list li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .books-list h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #394a6c;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h2>BOOK RENT PROFILE</h2>
+            <div class="navmenu">
+                <ul>
+                    <li><a href="home.html">HOME</a></li>
+                    <li><a href="main.html">JOIN IN</a></li>
+                    <li><a href="blog.html">BLOG</a></li>
+                    <li><a href="categories.html">CATEGORIES</a></li>
+                    <li><a href="profile.html"> PROFILE</a></li>
+                    <li><a href="books.html"> REVIEWS</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="contact.html">CONTACT US</a></li>
+                </ul>
+                <div class="search-box">
+                    <input type="search" class="search" placeholder="Search book here">
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section id="profile-section">
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-picture">
+                    <img src="https://via.placeholder.com/150" alt="Profile Picture">
+                </div>
+                <div class="profile-details">
+                    <div>First Name: <span id="loggedUserFName"></span></div>
+                    <div>Last Name: <span id="loggedUserLName"></span></div>
+                    <div>Email: <span id="loggedUserEmail"></span></div>
+                    <button id="logout">Logout</button>
+                    <button onclick="location.href='detailsabout.html';" id="details">See Details</button>
+                    <button onclick="location.href='profile.html';" id = "hide">Hide details</button>
+                </div>
+            </div>
+           
+
+            <div class="rating-list">
+                <h3>Ratings:</h3>
+                <ul id="rating-list"></ul>
+            </div>
+
+            <div class="books-section">
+                <h3>Horror Books:</h3>
+                <ul id="horror-books-list"></ul>
+            </div>
+            
+            <div class="books-section">
+                <h3>Thriller Books:</h3>
+                <ul id="thriller-books-list"></ul>
+            </div>
+            
+            <div class="books-section">
+                <h3>Adventure Books:</h3>
+                <ul id="adventure-books-list"></ul>
+            </div>
+
+            <div class="books-section">
+                <h3>Crime Books:</h3>
+                <ul id="crime-books-list"></ul>
+            </div>
+
+            <div class="books-section">
+                <h3>Short Story Books:</h3>
+                <ul id="shortstory-books-list"></ul>
+            </div>
+
+            <div class="books-section">
+                <h3>Biography Books:</h3>
+                <ul id="biography-books-list"></ul>
+            </div>
+
+            <div class="books-section">
+                <h3>Fantasy Books:</h3>
+                <ul id="fantasy-books-list"></ul>
+            </div>
+
+            <div class="books-section">
+                <h3>Literary Books:</h3>
+                <ul id="literary-books-list"></ul>
+            </div>
+            
+
+        </div>
+    </section>
+    <footer>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+        import { getFirestore, getDoc, doc, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBEOwYndOTHj2Lpv9oaAPqRn9ps7c8eMOk",
+            authDomain: "login-form-5929c.firebaseapp.com",
+            projectId: "login-form-5929c",
+            storageBucket: "login-form-5929c.appspot.com",
+            messagingSenderId: "704458274314",
+            appId: "1:704458274314:web:e2dd965b9f5391399591f3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const db = getFirestore();
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const loggedInUserId = user.uid;
+                localStorage.setItem('loggedInUserId', loggedInUserId);
+                fetchUserData(loggedInUserId);
+                fetchUserBooks(loggedInUserId);
+                fetchBorrowedFrom(loggedInUserId);
+                fetchWishList(loggedInUserId);
+                fetchBorrowRequests(loggedInUserId);
+                fetchPosts(loggedInUserId);
+            } else {
+                window.location.href = 'login.html'; 
+            }
+        });
+
+        function fetchUserData(userId) {
+            const docRef = doc(db, "users", userId);
+            getDoc(docRef)
+                .then((docSnap) => {
+                    if (docSnap.exists()) {
+                        const userData = docSnap.data();
+                        document.getElementById('loggedUserFName').innerText = userData.firstName || 'N/A';
+                        document.getElementById('loggedUserLName').innerText = userData.lastName || 'N/A';
+                        document.getElementById('loggedUserEmail').innerText = userData.email || 'N/A';
+                    } else {
+                        console.log("No such document!");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error fetching user data:", error);
+                });
+        }
+
+        async function fetchUserEmail(userId) {
+    try {
+        const userDocRef = doc(db, "users", userId);
+        const userDocSnap = await getDoc(userDocRef);
+        if (userDocSnap.exists()) {
+            const userData = userDocSnap.data();
+            return userData.email;
+        } else {
+            console.log("No such user document!");
+            return 'N/A';
+        }
+    } catch (error) {
+        console.error("Error fetching user email:", error);
+        return 'N/A';
+    }
+}
+
+
+
+async function fetchUserRatings(userId) {
+    const ratingsRef = collection(db, 'users', userId, 'ratings');
+    try {
+        const querySnapshot = await getDocs(ratingsRef);
+        const ratingsList = document.getElementById('rating-list');
+        ratingsList.innerHTML = ''; 
+
+        for (const doc of querySnapshot.docs) {
+            const ratingData = doc.data();
+            const timestamp = ratingData.timestamp ? ratingData.timestamp.toDate().toLocaleString() : 'N/A';
+            const ratedByEmail = await fetchUserEmail(ratingData.ratedBy); 
+
+            const li = document.createElement('li');
+            li.textContent = `Rating: ${ratingData.rating} | Rated By: ${ratedByEmail} | Timestamp: ${timestamp}`;
+            ratingsList.appendChild(li);
+        }
+    } catch (error) {
+        console.error("Error fetching ratings:", error);
+    }
+}
+function fetchSubCollectionBooks(userId, subCollectionName, listElementId) {
+    const subCollectionRef = collection(db, 'users', userId, subCollectionName);
+    getDocs(subCollectionRef)
+        .then((querySnapshot) => {
+            const listElement = document.getElementById(listElementId);
+            listElement.innerHTML = ''; 
+            querySnapshot.forEach((doc) => {
+                const book = doc.data();
+                const li = document.createElement('li');
+                li.textContent = `${book.title} by ${book.author}`;
+                listElement.appendChild(li);
+            });
+        })
+        .catch((error) => {
+            console.error(`Error fetching books from ${subCollectionName}:`, error);
+        });
+}
+
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        const loggedInUserId = user.uid;
+        localStorage.setItem('loggedInUserId', loggedInUserId);
+        fetchUserRatings(loggedInUserId);
+        fetchUserData(loggedInUserId);
+
+        const subCollections = [
+            { name: 'horrorbooks2', listId: 'horror-books-list' },
+            { name: 'thrillerbooks2', listId: 'thriller-books-list' },
+            { name: 'adventurebooks2', listId: 'adventure-books-list' },
+            { name: 'biographybooks2', listId: 'biography-books-list' },
+            { name: 'crimebooks2', listId: 'crime-books-list' },
+            { name: 'fantasybooks2', listId: 'fantasy-books-list' },
+            { name: 'horrorbooks2', listId: 'horror-books-list' },
+            { name: 'literarybooks2', listId: 'literary-books-list' },
+            { name: 'shortstorybooks2', listId: 'shortstory-books-list' }
+        ];
+
+        subCollections.forEach(({ name, listId }) => {
+            fetchSubCollectionBooks(loggedInUserId, name, listId);
+        });
+    } else {
+        window.location.href = 'login.html'; 
+    }
+});
+
+
+document.getElementById('logout').addEventListener('click', () => {
+    signOut(auth).then(() => {
+        window.location.href = 'login.html';
+    }).catch((error) => {
+        console.error('Sign Out Error', error);
+    });
+});
+
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Detail - Funny Story</title>
+    <link rel="stylesheet" href="#">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <style>
+    * {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.navigationbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 90px;
+    background:#eccbb7;
+}
+
+.navigationbar h2 {
+    color: aliceblue;
+    font-size: 25px;
+    font-weight: 500;
+    padding: 10px;
+}
+
+.navigationmenu {
+    display: flex;
+    align-items: center;
+}
+
+.navigationmenu ul {
+    display: flex;
+    gap: 17px;
+}
+
+.navigationmenu li {
+    display: inline;
+}
+
+.navigationmenu li a {
+    color: aliceblue;
+    padding: 0px 10px;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    
+}
+
+.search-box .search {
+    padding: 12px 8px;
+    border-radius: 40px;
+    font-size: 14px;
+}
+
+.search-box i {
+    color: #394a6c;
+    position: absolute;
+    right: 10px;
+    background-color: rgb(209, 246, 233);
+    padding: 12px;
+    border-radius: 50px;
+}
+
+header {
+    background: #ffffff;
+    width: 100%;
+    height: 100%;
+}
+
+        
+        #book-detail {
+            padding: 50px;
+        }
+
+        .set-row {
+            display: flex;
+            gap: 40px;
+        }
+
+    
+        .book-cover img {
+            width: 240px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .book-info h1 {
+            font-size: 30px;
+            color: #efc7ae; 
+        }
+
+        .book-info h3 {
+            font-size: 23px;
+            color: #efc7ae; 
+            margin-top: 5px;
+        }
+
+        .rating {
+            font-size: 19px;
+            color: #f5c518; 
+            margin: 10px 0;
+        }
+
+        .description {
+            font-size: 17px;
+            margin: 10px 0;
+        }
+
+        .book-details {
+            font-size: 16px;
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+
+        .book-details strong {
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #efc7ae;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 17px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #003d5b; 
+        }
+        #reviews {
+            margin-top: 20px;
+        }
+
+        #reviews h2 {
+            font-size: 24px;
+            color:#eccbb7; 
+            margin-bottom: 15px;
+        }
+
+        .review {
+            background-color: #f4f4f4;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .review h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .review .rating {
+            font-size: 18px;
+            color: #f5c518; 
+        }
+       
+      
+        #borrow-form {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #borrow-form h2 {
+            font-size: 24px;
+            color: #efc7ae; 
+            margin-bottom: 15px;
+        }
+
+        #borrow-form label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        #borrow-form input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+            font-size: 16px;
+        }
+
+        #borrow-form button {
+            background-color: #efc7ae; 
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        #borrow-form button:hover {
+            background-color: #efc7ae; 
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navigationbar">
+            <div class="logo">
+                <h2>BOOK RENT</h2>
+            </div>
+            <div class="navigationmenu">
+                <ul>
+                    <li> <a href="home.html">HOME</a></li>
+                    <li> <a href="main.html">JOIN IN</a></li>
+                    <li> <a href="categories.html">CATEGORIES</a></li>
+                    <li> <a href="about.html">ABOUT</a></li>
+                    <li><a href="blog.html" >BLOG</a></li>
+                    <li> <a href="contact.html">CONTACT US </a></li>
+                </ul>
+                <div class="search-box">
+                    <input type="search" class="search" placeholder="Search book here">
+                  
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="book-detail">
+            <div class="set-row">
+                <div class="col book-cover">
+                    <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1691777485i/194802722.jpg" alt="Funny Story Book Cover">
+                </div>
+                <div class="col book-info">
+                    <h1>Funny Story</h1>
+                    <h3>by Emily Henry</h3>
+                    <div class="rating">
+                        <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span>(46 reviews)</span>
+                    </div>
+                    <p class="description">A shimmering, joyful new novel about a pair of opposites with the wrong thing in common. Emily Henry delivers another unforgettable romantic comedy filled with humor, heart, and humanity.</p>
+                    <div class="book-details">
+                        <p><strong>Publication Date:</strong> 23 April 2024</p>
+                        <p><strong>Genres:</strong> Romance, Comedy, Fiction</p>
+                        <p><strong>Pages:</strong> 320</p>
+                        <p><strong>ISBN:</strong> 978-1234567890</p>
+                    </div>
+                    <a href="#" id="borrow-book-btn" class="btn">Borrow this Book</a>
+                </div>
+            </div>
+        </section>
+
+        <div id="borrow-form">
+            <h2>Borrow This Book</h2>
+            <div id="lender-list"></div>
+            <form id="borrow-request-form">
+                <label for="borrower-name">Your Name:</label>
+                <input type="text" id="borrower-name" name="borrower-name" required>
+                
+                <label for="borrower-email">Your Email:</label>
+                <input type="email" id="borrower-email" name="borrower-email" required>
+                
+                <label for="borrower-phone">Your Phone Number:</label>
+                <input type="tel" id="borrower-phone" name="borrower-phone">
+                
+                <label for="pickup-location">Pickup Location:</label>
+                <input type="text" id="pickup-location" name="pickup-location" required>
+                
+                <label for="loan-period">Loan Period (in days):</label>
+                <input type="number" id="loan-period" name="loan-period" min="1" required>
+                
+                <button type="submit">Submit Request</button>
+            </form>
+        </div>
+
+        <section id="reviews">
+            <h2>User Reviews</h2>
+            <div class="review">
+                <h4>Alice</h4>
+                <div class="rating">
+                    <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                </div>
+                <p>Great!</p>
+            </div>
+            <div class="review">
+                <h4>Ana</h4>
+                <div class="rating">
+                    <span>&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                </div>
+                <p>I dont like it</p>
+            </div>
+           
+        </section>
+    </main>
+
+    <footer>
+       
+    </footer>
+
+    <script>
+       
+      
+    </script>
+</body>
+</html>

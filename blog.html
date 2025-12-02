@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Book Rent System</title>
+    <link rel="stylesheet" href="#">
+    <link rel="stylesheet" href="#">
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        list-style-type: none;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .navigationbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 90px;
+        background: #eccbb7;
+    }
+
+    .navigationbar h2 {
+        color: aliceblue;
+        font-size: 25px;
+        font-weight: 500;
+        padding: 10px;
+    }
+
+    .navigationmenu {
+        display: flex;
+        align-items: center;
+    }
+
+    .navigationmenu ul {
+        display: flex;
+        gap: 17px;
+    }
+
+    .navigationmenu li {
+        display: inline;
+    }
+
+    .navigationmenu li a {
+        color: aliceblue;
+        padding: 0px 10px;
+        font-size: 15px;
+        font-weight: 400;
+    }
+
+    .search-box {
+        display: flex;
+        align-items: center;
+    }
+
+    .search-box .search {
+        padding: 12px 8px;
+        border-radius: 40px;
+        font-size: 14px;
+    }
+
+    header {
+        background: #ffffff;
+        width: 100%;
+        height: 100vh;
+    }
+
+    #blog-content {
+        padding: 21px;
+        background-color: #fff;
+        max-width: 800px;
+        margin: 0 auto;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin-top: 2rem;
+    }
+
+    .blog-post {
+        margin-bottom: 2rem;
+        background-color: #f9f9f9;
+        border: 2px solid #eee;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    .blog-post .post .author {
+        color: #666;
+        font-size: 1rem;
+        margin-top: 0;
+        margin-top: 10px;
+        padding: 10px;
+    }
+
+    .blog-post .post p {
+        color: #555;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #394a6c;
+    }
+
+    .part {
+        background-color: #e9e9e9;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .comments {
+        margin-top: 1rem;
+        color: #394a6c;
+    }
+
+    .comments h3 {
+        font-size: 1.2rem;
+        color: #333;
+        margin-bottom: 0.5rem;
+    }
+
+    .comment {
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        background-color: #e9e9e9;
+        border-radius: 5px;
+    }
+
+    .comment .comment-author {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+    }
+
+    .comment p {
+        font-size: 1rem;
+        color: #333;
+    }
+
+    .comment-form {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+    }
+
+    .comment-form textarea {
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .comment-form button {
+        padding: 0.5rem;
+        font-size: 1rem;
+        background-color: #eccbb7;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .comment-form button:hover {
+        background-color: #cc987d;
+    }
+
+    .create-post {
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    .create-post button {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        background-color: #cc987d;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .create-post button:hover {
+        background-color: #2c3a54;
+    }
+
+    .create-post-form {
+        padding: 2rem;
+        background-color: #fff;
+        max-width: 800px;
+        margin: 2rem auto;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    .create-post-form h2 {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 1rem;
+    }
+
+    .create-post-form form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .create-post-form form input,
+    .create-post-form form textarea {
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+    .create-post-form form button {
+        padding: 0.5rem;
+        font-size: 1rem;
+        background-color: #cc987d;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .create-post-form form button:hover {
+        background-color: #eccbb7;
+    }
+
+    @media screen and (max-width: 768px) {
+        .navigationbar h2 {
+            font-size: 20px;
+        }
+
+        .navigationmenu ul {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+</style>
+
+<body>
+    <header>
+        <nav class="navigationbar">
+            <h2>BOOK RENT BLOG</h2>
+            <div class="navigationmenu">
+                <ul>
+                    <li><a href="home.html">HOME</a></li>
+                    <li><a href="main.html">JOIN IN</a></li>
+                    <li><a href="blog.html">BLOG</a></li>
+                    <li><a href="categories.html">CATEGORIES</a></li>
+                    <li><a href="profile.html"> PROFILE</a></li>
+                    <li><a href="books.html"> REVIEWS</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="contact.html">CONTACT US</a></li>
+                </ul>
+                <div class="search-box">
+                    <input type="search" class="search" placeholder="Search blog here">
+                </div>
+            </div>
+        </nav>
+        <section id="blog-content">
+         
+        </section>
+
+        <div class="create-post">
+            <button onclick="togglePostForm()">Create Post</button>
+        </div>
+
+        <div class="create-post-form" id="create-post-form" style="display: none;">
+            <h2>Create a New Post</h2>
+            <form id="post-form" onsubmit="return createPost(event)">
+                <input type="text" id="post-title" placeholder="Title" required><br>
+                <textarea id="post-content" placeholder="Your question or opinion" required></textarea><br>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </header>
+    <footer></footer>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+
+    <script>
+    
+        var firebaseConfig = {
+            apiKey: "AIzaSyBEOwYndOTHj2Lpv9oaAPqRn9ps7c8eMOk",
+            authDomain: "login-form-5929c.firebaseapp.com",
+            databaseURL: "https://login-form-5929c-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "login-form-5929c",
+            storageBucket: "login-form-5929c.appspot.com",
+            messagingSenderId: "704458274314",
+            appId: "1:704458274314:web:e2dd965b9f5391399591f3"
+        };
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+        var auth = firebase.auth();
+
+        function addComment(event) {
+            event.preventDefault();
+            var commentInput = event.target.querySelector('textarea');
+            var commentText = commentInput.value;
+            var postId = event.target.closest('.blog-post').getAttribute('data-post-id');
+            var user = auth.currentUser;
+
+            if (!user) {
+                alert("You must be logged in to add a comment.");
+                return;
+            }
+
+            var username = user.displayName || user.email || 'Anonymous';
+            var userId = user.uid;
+
+            db.collection('posts').doc(postId).collection('comments').add({
+                text: commentText,
+                author: username,
+                userId: userId,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                commentInput.value = '';
+                loadComments(postId);
+            }).catch((error) => {
+                console.error("Error adding comment: ", error);
+            });
+        }
+
+        function loadComments(postId) {
+            db.collection('posts').doc(postId).collection('comments')
+                .orderBy('timestamp', 'asc')
+                .get().then((querySnapshot) => {
+                    var commentsDiv = document.querySelector('.blog-post[data-post-id="' + postId + '"] .comments');
+                    commentsDiv.innerHTML = '<h3>Comments</h3>';
+                    querySnapshot.forEach((doc) => {
+                        var comment = doc.data();
+                        var commentDiv = document.createElement('div');
+                        commentDiv.classList.add('comment');
+                        commentDiv.innerHTML = '<p class="comment-author">' + comment.author + '</p><p>' + comment.text + '</p>';
+                        commentsDiv.appendChild(commentDiv);
+                    });
+                    var commentForm = document.querySelector('.blog-post[data-post-id="' + postId + '"] .comment-form');
+                    commentsDiv.appendChild(commentForm);
+                }).catch((error) => {
+                    console.error("Error loading comments: ", error);
+                });
+        }
+
+        function createPost(event) {
+            event.preventDefault();
+            var title = document.getElementById('post-title').value;
+            var content = document.getElementById('post-content').value;
+            var user = auth.currentUser;
+
+            if (!user) {
+                alert("You must be logged in to create a post.");
+                return;
+            }
+
+            var username = user.displayName || user.email || 'Anonymous';
+            var userId = user.uid;
+
+            var postData = {
+                title: title,
+                content: content,
+                author: username,
+                userId: userId,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            db.collection('posts').add(postData).then((docRef) => {
+                var postId = docRef.id;
+
+                document.getElementById('post-title').value = '';
+                document.getElementById('post-content').value = '';
+                togglePostForm();
+                loadPosts();
+            }).catch((error) => {
+                console.error("Error adding post: ", error);
+            });
+        }
+
+        function loadPosts() {
+            db.collection('posts')
+                .orderBy('timestamp', 'desc')
+                .get().then((querySnapshot) => {
+                    var blogContent = document.getElementById('blog-content');
+                    blogContent.innerHTML = '';
+                    querySnapshot.forEach((doc) => {
+                        var post = doc.data();
+                        var postDiv = document.createElement('div');
+                        postDiv.classList.add('blog-post');
+                        postDiv.setAttribute('data-post-id', doc.id);
+                        postDiv.innerHTML = '<div class="post"><div class="part"><p>' + post.content + '</p><p class="author">Posted by ' + post.author + '</p></div><div class="comments"><h3>Comments</h3></div><form class="comment-form" onsubmit="return addComment(event)"><textarea placeholder="Add your comment" required></textarea><button type="submit">Submit</button></form></div>';
+                        blogContent.appendChild(postDiv);
+                        loadComments(doc.id);
+                    });
+                }).catch((error) => {
+                    console.error("Error loading posts: ", error);
+                });
+        }
+
+        function togglePostForm() {
+            var form = document.getElementById('create-post-form');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+
+        
+        window.onload = function () {
+            loadPosts();
+        };
+    </script>
+</body>
+
+</html>
+
