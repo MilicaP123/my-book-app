@@ -248,11 +248,12 @@
         });
 
         const logoutButton = document.getElementById('logout');
-        logoutButton.addEventListener('click', () => {
-            localStorage.removeItem('loggedInUserId');
+            logoutButton.addEventListener('click', () => {
+            const auth = getAuth();
             signOut(auth)
                 .then(() => {
-                    window.location.href = 'main.html';
+                    localStorage.removeItem('loggedInUserId');
+                    window.location.href = 'main.html'; 
                 })
                 .catch((error) => {
                     console.error('Error signing out:', error);
